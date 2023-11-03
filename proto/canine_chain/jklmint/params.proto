@@ -12,6 +12,6 @@ message Params {
   string mint_denom = 1 [ (gogoproto.moretags) = "yaml:\"mint_denom\"" ];
   int64 providerRatio = 2 [ (gogoproto.moretags) = "yaml:\"provider_ratio\"" ];
   int64 tokensPerBlock = 3 [ (gogoproto.moretags) = "yaml:\"tokens_per_block\"" ];
-
+  string mintDecrease = 4  [ (gogoproto.moretags) = "yaml:\"mint_decrease\"" ];
 
 }

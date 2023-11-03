@@ -9,6 +9,38 @@ import (
 	storeTypes "github.com/jackalLabs/canine-chain/v3/x/storage/types"
 )
 
+// Mint creates a new token to mint from the previous blocks information, it returns a decimal free coin to mint
+func (k Keeper) Mint(ctx sdk.Context) (sdk.Coin, error) {
+
+	mintParams := k.GetParams(ctx)
+
+	mintDecrease, err := sdk.NewDecFromStr(mintParams.MintDecrease)
+	if err != nil {
+		return sdk.Coin{}, err
+	}
+
+	lastMinted := k.GetLastBlockMinted(ctx) // if this is the first time this is run, it will return the default minting amount
+	lastMintedAmt := lastMinted.Amount
+
+	blocksPerYear := sdk.NewDec(5_256_000)
+
+	newMinted := lastMintedAmt.Sub(mintDecrease.Quo(blocksPerYear))
+
+	newMintedDecCoin := sdk.NewDecCoin(mintParams.MintDenom, newMinted.TruncateInt())
+
+	err = k.SetLastBlockMinted(ctx, newMintedDecCoin)
+	if err != nil {
+		return sdk.Coin{}, err
+	}
+
+	toMint, _ := newMintedDecCoin.TruncateDecimal()
+
+	return toMint, nil
+}
+
+// BlockMint handles every blocks mint functionality
+//
+// TODO: Completely revamp function, currently it handles all minting & distribution logic which is bad
 func (k Keeper) BlockMint(ctx sdk.Context) {
 	tokensPerBlock := k.GetParams(ctx).TokensPerBlock
 
