@@ -3,7 +3,6 @@ package keeper_test
 import (
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/jackalLabs/canine-chain/v3/testutil"
 	"github.com/jackalLabs/canine-chain/v3/x/storage/types"
 )
@@ -48,19 +47,12 @@ func (suite *KeeperTestSuite) TestRewardsAttestationForm() {
 		Cid: cid,
 	}
 
-	addresses, err := testutil.CreateTestAddresses("cosmos", 50)
-	suite.NoError(err)
-
 	res, err := suite.queryClient.Attestation(suite.ctx.Context(), &attestationRequest)
 	suite.Require().NoError(err)
 	suite.Require().Equal(attestation.Cid, res.Attestation.Cid)
 	suite.Require().Equal(attestation.Attestations, res.Attestation.Attestations)
 
-	address, err := sdk.AccAddressFromBech32(addresses[0])
-	suite.Require().NoError(err)
-
-	err = suite.storageKeeper.InternalRewards(suite.ctx, make([]types.ActiveDeals, 0), address)
-	suite.Require().NoError(err)
+	suite.storageKeeper.RunRewardBlock(suite.ctx)
 
 	_, found := suite.storageKeeper.GetAttestationForm(suite.ctx, cid)
 	suite.Require().Equal(false, found)

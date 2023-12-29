@@ -59,3 +59,17 @@ func (k Keeper) GetAllActiveDeals(ctx sdk.Context) (list []types.ActiveDeals) {
 
 	return
 }
+
+// IterateAllActiveDeals allows you to iterate through all activeDeals and run a function on each of them
+func (k Keeper) IterateAllActiveDeals(ctx sdk.Context, fn func(*types.ActiveDeals)) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ActiveDealsKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.ActiveDeals
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		fn(&val)
+	}
+}

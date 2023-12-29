@@ -72,7 +72,7 @@ func (k msgServer) Postproof(goCtx context.Context, msg *types.MsgPostproof) (*t
 		return &types.MsgPostproofResponse{Success: false, ErrorMessage: "cannot verify proof"}, nil
 	}
 
-	if contract.Proofverified == "true" {
+	if contract.Proofverified == True {
 		meter.RefundGas(meter.GasConsumed()-usedGas, "successful proof refund")
 		return &types.MsgPostproofResponse{Success: false, ErrorMessage: "proof already verified"}, nil
 	}

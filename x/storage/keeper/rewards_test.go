@@ -81,8 +81,7 @@ func (suite *KeeperTestSuite) TestReward() {
 	suite.Require().Equal(blocks, ctx.BlockHeight())
 	suite.Require().Equal(ctx.BlockHeight()%blocks, int64(0))
 
-	err = suite.storageKeeper.HandleRewardBlock(ctx)
-	suite.NoError(err)
+	suite.storageKeeper.RunRewardBlock(ctx)
 
 	pOneAcc, err := sdk.AccAddressFromBech32(providerOne)
 	suite.NoError(err)
@@ -165,8 +164,7 @@ func (suite *KeeperTestSuite) TestMultiReward() {
 	suite.Require().Equal(blocks, ctx.BlockHeight())
 	suite.Require().Equal(ctx.BlockHeight()%blocks, int64(0))
 
-	err = suite.storageKeeper.HandleRewardBlock(ctx)
-	suite.NoError(err)
+	suite.storageKeeper.RunRewardBlock(ctx)
 
 	nom := sdk.NewDec(20)
 	den := sdk.NewDec(int64(total))
