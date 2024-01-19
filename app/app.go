@@ -140,7 +140,6 @@ import (
 	storagemoduletypes "github.com/jackalLabs/canine-chain/v3/x/storage/types"
 
 	filetreemodule "github.com/jackalLabs/canine-chain/v3/x/filetree"
-	filetreemodulekeeper "github.com/jackalLabs/canine-chain/v3/x/filetree/keeper"
 	filetreemoduletypes "github.com/jackalLabs/canine-chain/v3/x/filetree/types"
 
 	notificationsmodule "github.com/jackalLabs/canine-chain/v3/x/notifications"
@@ -336,7 +335,6 @@ type JackalApp struct {
 	RnsKeeper           rnsmodulekeeper.Keeper
 	OracleKeeper        oraclemodulekeeper.Keeper
 	StorageKeeper       storagemodulekeeper.Keeper
-	FileTreeKeeper      filetreemodulekeeper.Keeper
 	NotificationsKeeper notificationsmodulekeeper.Keeper
 
 	/*
@@ -655,13 +653,7 @@ func NewJackalApp(
 
 	*/
 
-	app.FileTreeKeeper = *filetreemodulekeeper.NewKeeper(
-		appCodec,
-		keys[filetreemoduletypes.StoreKey],
-		keys[filetreemoduletypes.MemStoreKey],
-		app.getSubspace(filetreemoduletypes.ModuleName),
-	)
-	filetreeModule := filetreemodule.NewAppModule(appCodec, app.FileTreeKeeper, app.AccountKeeper, app.BankKeeper)
+	filetreeModule := filetreemodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper)
 
 	app.NotificationsKeeper = *notificationsmodulekeeper.NewKeeper(
 		appCodec,
