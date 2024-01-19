@@ -966,7 +966,6 @@ func NewJackalApp(
 		rnsModule,
 		storageModule,
 		oracleModule,
-		filetreeModule,
 		notificationsModule,
 	)
 
