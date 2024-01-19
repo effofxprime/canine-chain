@@ -653,8 +653,6 @@ func NewJackalApp(
 
 	*/
 
-	filetreeModule := filetreemodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper)
-
 	app.NotificationsKeeper = *notificationsmodulekeeper.NewKeeper(
 		appCodec,
 		keys[notificationsmoduletypes.StoreKey],
@@ -729,7 +727,6 @@ func NewJackalApp(
 		crisis.NewAppModule(&app.crisisKeeper, skipGenesisInvariants), // always be last to make sure that it checks for all invariants and not only part of them
 		rnsModule,
 		storageModule,
-		filetreeModule,
 		oracleModule,
 		notificationsModule,
 		icaModule,
