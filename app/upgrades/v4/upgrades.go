@@ -54,7 +54,7 @@ type FidContents struct {
 }
 
 type MerkleContents struct {
-	Merkles [][]byte `json:"merkles"`
+	Merkle string `json:"merkle"`
 }
 
 func UpdateFileTree(ctx sdk.Context, fk *filetreemodulekeeper.Keeper, merkleMap map[string][]byte) {
@@ -71,19 +71,13 @@ func UpdateFileTree(ctx sdk.Context, fk *filetreemodulekeeper.Keeper, merkleMap 
 			continue
 		}
 
-		merkles := make([][]byte, 0)
-
-		for _, fid := range fidContents.Fid {
-			m := merkleMap[fid]
-			if m == nil {
-				continue
-			}
-
-			merkles = append(merkles, m)
-
+		fid := fidContents.Fid[0]
+		m := merkleMap[fid]
+		if m == nil {
+			continue
 		}
 
-		merkleContents := MerkleContents{Merkles: merkles}
+		merkleContents := MerkleContents{Merkle: hex.EncodeToString(m)}
 
 		merkleContentBytes, err := json.Marshal(merkleContents)
 		if err != nil {
