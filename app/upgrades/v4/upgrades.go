@@ -11,9 +11,11 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
+	bankmodulekeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	"github.com/jackalLabs/canine-chain/v3/app/upgrades"
 	filetreemodulekeeper "github.com/jackalLabs/canine-chain/v3/x/filetree/keeper"
+
 	storagekeeper "github.com/jackalLabs/canine-chain/v3/x/storage/keeper"
 
 	storagemoduletypes "github.com/jackalLabs/canine-chain/v3/x/storage/types"
@@ -27,15 +29,17 @@ type Upgrade struct {
 	configurator module.Configurator
 	sk           *storagekeeper.Keeper
 	fk           *filetreemodulekeeper.Keeper
+	bk           bankmodulekeeper.Keeper
 }
 
 // NewUpgrade returns a new Upgrade instance
-func NewUpgrade(mm *module.Manager, configurator module.Configurator, sk *storagekeeper.Keeper, fk *filetreemodulekeeper.Keeper) *Upgrade {
+func NewUpgrade(mm *module.Manager, configurator module.Configurator, sk *storagekeeper.Keeper, fk *filetreemodulekeeper.Keeper, bk bankmodulekeeper.Keeper) *Upgrade {
 	return &Upgrade{
 		mm:           mm,
 		configurator: configurator,
 		sk:           sk,
 		fk:           fk,
+		bk:           bk,
 	}
 }
 
@@ -55,6 +59,27 @@ type FidContents struct {
 
 type MerkleContents struct {
 	Merkles [][]byte `json:"merkles"`
+}
+
+func refundCollateral(ctx sdk.Context, sk *storagekeeper.Keeper, bk bankmodulekeeper.Keeper) {
+	collateral := sk.GetAllCollateral(ctx)
+	for _, t := range collateral {
+		addr, err := sdk.AccAddressFromBech32(t.Address)
+		if err != nil {
+			continue
+		}
+		c := sdk.NewInt64Coin("ujkl", t.Amount)
+		cs := sdk.NewCoins(c)
+		err = bk.SendCoinsFromModuleToAccount(ctx, storagemoduletypes.CollateralCollectorName, addr, cs)
+		if err != nil {
+			continue
+		}
+	}
+
+	for _, t := range collateral {
+		sk.RemoveCollateral(ctx, t.Address)
+	}
+
 }
 
 func UpdateFileTree(ctx sdk.Context, fk *filetreemodulekeeper.Keeper, merkleMap map[string][]byte) {
@@ -199,6 +224,8 @@ func (u *Upgrade) Handler() upgradetypes.UpgradeHandler {
 		UpdateFileTree(ctx, u.fk, fidMerkleMap)
 
 		UpdatePaymentInfo(ctx, u.sk) // updating payment info with values at time of upgrade
+
+		refundCollateral(ctx, u.sk, u.bk)
 
 		newVM, err := u.mm.RunMigrations(ctx, u.configurator, fromVM)
 		if err != nil {

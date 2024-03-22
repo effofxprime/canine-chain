@@ -6,6 +6,7 @@ package testutil
 
 import (
 	"fmt"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	reflect "reflect"
 
 	types "github.com/cosmos/cosmos-sdk/types"
@@ -277,5 +278,38 @@ func NewMockRNSKeeper(ctrl *gomock.Controller) *MockRNSKeeper {
 
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockRNSKeeper) EXPECT() *MockRNSKeeperMockRecorder {
+	return m.recorder
+}
+
+// MockStakingKeeper is a mock of StakingKeeper interface.
+type MockStakingKeeper struct {
+	ctrl     *gomock.Controller
+	recorder *MockStakingKeeperMockRecorder
+}
+
+func (m *MockStakingKeeper) GetDelegatorDelegations(ctx types.Context, delegator types.AccAddress, maxRetrieve uint16) []stakingtypes.Delegation {
+	d := make([]stakingtypes.Delegation, 1)
+	d[0] = stakingtypes.Delegation{
+		DelegatorAddress: delegator.String(),
+		ValidatorAddress: "jklvaloper1gp957czryfgyvxwn3tfnyy2f0t9g2p4pfqrktj",
+		Shares:           types.NewDec(10_000_000_000_000),
+	}
+	return d
+}
+
+// MockOracleKeeperMockRecorder is the mock recorder for MockOracleKeeper.
+type MockStakingKeeperMockRecorder struct {
+	mock *MockStakingKeeper
+}
+
+// NewMockOracleKeeper creates a new mock instance.
+func NewMockStakingKeeper(ctrl *gomock.Controller) *MockStakingKeeper {
+	mock := &MockStakingKeeper{ctrl: ctrl}
+	mock.recorder = &MockStakingKeeperMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockStakingKeeper) EXPECT() *MockStakingKeeperMockRecorder {
 	return m.recorder
 }

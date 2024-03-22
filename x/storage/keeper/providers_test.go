@@ -81,19 +81,12 @@ func (suite *KeeperTestSuite) TestInitProviders() {
 	suite.Require().Equal(res.Provider.BurnedContracts, "0")
 	suite.Require().Equal(res.Provider.Creator, initMsg.Creator)
 
-	coin := suite.bankKeeper.GetBalance(suite.ctx, userAcc, "ujkl")
-
-	suite.Require().Equal(sdk.NewInt(0), coin.Amount)
-
 	shutdownMsg := types.MsgShutdownProvider{
 		Creator: user,
 	}
 	_, err = msgSrvr.ShutdownProvider(ctx, &shutdownMsg)
 	suite.Require().NoError(err)
 
-	coin = suite.bankKeeper.GetBalance(suite.ctx, userAcc, "ujkl")
-
-	suite.Require().Equal(deposit.Amount, coin.Amount)
 }
 
 func (suite *KeeperTestSuite) TestGetProviders() {

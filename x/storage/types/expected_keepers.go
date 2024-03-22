@@ -3,6 +3,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
+	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	oracletypes "github.com/jackalLabs/canine-chain/v3/x/oracle/types"
 )
 
@@ -39,4 +40,10 @@ type OracleKeeper interface {
 // RnsKeeper defines the expected interface needed to resolve RNS names.
 type RnsKeeper interface {
 	Resolve(ctx sdk.Context, name string) (sdk.AccAddress, error)
+}
+
+type StakingKeeper interface {
+	GetDelegatorDelegations(ctx sdk.Context, delegator sdk.AccAddress,
+		maxRetrieve uint16,
+	) (delegations []stakingTypes.Delegation)
 }

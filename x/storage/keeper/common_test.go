@@ -54,6 +54,7 @@ func setupStorageKeeper(t *testing.T) (
 	accountKeeper := storagetestutil.NewMockAccountKeeper(ctrl)
 	oracleKeeper := storagetestutil.NewMockOracleKeeper(ctrl)
 	rnsKeeper := storagetestutil.NewMockRNSKeeper(ctrl)
+	stakingKeeper := storagetestutil.NewMockStakingKeeper(ctrl)
 
 	trackMockBalances(bankKeeper)
 	accountKeeper.EXPECT().GetModuleAddress(types.ModuleName).Return(modAccount).AnyTimes()
@@ -72,7 +73,7 @@ func setupStorageKeeper(t *testing.T) (
 	)
 
 	// storage keeper initializations
-	storageKeeper := keeper.NewKeeper(encCfg.Codec, key, paramsSubspace, bankKeeper, accountKeeper, oracleKeeper, rnsKeeper, authtypes.FeeCollectorName)
+	storageKeeper := keeper.NewKeeper(encCfg.Codec, key, paramsSubspace, bankKeeper, accountKeeper, oracleKeeper, rnsKeeper, stakingKeeper, authtypes.FeeCollectorName)
 	storageKeeper.SetParams(ctx, types.DefaultParams())
 
 	// Register all handlers for the MegServiceRouter.

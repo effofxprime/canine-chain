@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/jackalLabs/canine-chain/v3/x/storage/types"
 )
 
@@ -16,27 +15,6 @@ func (k msgServer) InitProvider(goCtx context.Context, msg *types.MsgInitProvide
 	if found {
 		return nil, types.ErrProviderExists
 	}
-
-	params := k.GetParams(ctx)
-
-	coin := sdk.NewInt64Coin("ujkl", params.CollateralPrice)
-	coins := sdk.NewCoins(coin)
-
-	account, err := sdk.AccAddressFromBech32(msg.Creator)
-	if err != nil {
-		return nil, err
-	}
-
-	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, account, types.CollateralCollectorName, coins)
-	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%s does not have %s", account, coin.String())
-	}
-
-	collat := types.Collateral{
-		Address: msg.Creator,
-		Amount:  params.CollateralPrice,
-	}
-	k.SetCollateral(ctx, collat)
 
 	provider := types.Providers{
 		Address:         msg.Creator,
@@ -59,24 +37,6 @@ func (k msgServer) ShutdownProvider(goCtx context.Context, msg *types.MsgShutdow
 	_, found := k.GetProviders(ctx, msg.Creator)
 	if !found {
 		return nil, types.ErrProviderNotFound
-	}
-
-	collateral, found := k.GetCollateral(ctx, msg.Creator)
-	if found {
-		coin := sdk.NewInt64Coin("ujkl", collateral.Amount)
-		coins := sdk.NewCoins(coin)
-
-		account, err := sdk.AccAddressFromBech32(msg.Creator)
-		if err != nil {
-			return nil, err
-		}
-
-		err = k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.CollateralCollectorName, account, coins)
-		if err != nil {
-			return nil, err
-		}
-
-		k.RemoveCollateral(ctx, msg.Creator)
 	}
 
 	k.RemoveProviders(ctx, msg.Creator)

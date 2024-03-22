@@ -108,7 +108,7 @@ else
 	go build -mod=readonly $(BUILD_FLAGS) -o build/contract_tests ./cmd/contract_tests
 endif
 
-install: check-go-version go.sum
+install: go.sum
 	go install -mod=readonly $(BUILD_FLAGS) ./cmd/canined
 
 ########################################

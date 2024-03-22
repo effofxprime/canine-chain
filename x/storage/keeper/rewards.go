@@ -60,6 +60,16 @@ func (k Keeper) manageProof(ctx sdk.Context, sizeTracker *map[string]int64, file
 	}
 }
 
+func (k Keeper) totalDelegations(ctx sdk.Context, address sdk.AccAddress) int64 {
+	delegations := k.stakingKeeper.GetDelegatorDelegations(ctx, address, 100)
+
+	var d int64
+	for _, delegation := range delegations {
+		d += delegation.Shares.TruncateInt().Int64()
+	}
+	return d
+}
+
 func (k Keeper) rewardProviders(ctx sdk.Context, totalSize int64, sizeTracker *map[string]int64) {
 	networkValue := sdk.NewDec(totalSize)
 
@@ -110,6 +120,8 @@ func (k Keeper) rewardProviders(ctx sdk.Context, totalSize int64, sizeTracker *m
 		}
 	})
 
+	params := k.GetParams(ctx)
+	collateralPrice := params.CollateralPrice
 	for prover, worth := range *sizeTracker {
 
 		providerValue := sdk.NewDec(worth)
@@ -129,6 +141,12 @@ func (k Keeper) rewardProviders(ctx sdk.Context, totalSize int64, sizeTracker *m
 			ctx.Logger().Error(sdkerrors.Wrapf(err, "failed to convert prover address %s to bech32", prover).Error())
 			continue
 		}
+
+		if k.totalDelegations(ctx, pAddress) < collateralPrice {
+			ctx.Logger().Info("provider does not have enough delegations to get rewarded")
+			continue
+		}
+
 		err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, storageWallet, types.ModuleName, coins)
 		if err != nil {
 			ctx.Logger().Error(sdkerrors.Wrapf(err, "failed to send %s to %s", coins.String(), types.ModuleName).Error())

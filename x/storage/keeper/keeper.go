@@ -20,6 +20,7 @@ type (
 		accountKeeper types.AccountKeeper
 		oracleKeeper  types.OracleKeeper
 		rnsKeeper     types.RnsKeeper
+		stakingKeeper types.StakingKeeper
 
 		feeCollectorName string
 	}
@@ -33,6 +34,7 @@ func NewKeeper(
 	accountKeeper types.AccountKeeper,
 	oracleKeeper types.OracleKeeper,
 	rnsKeeper types.RnsKeeper,
+	stakingKeeper types.StakingKeeper,
 	feeCollectorName string,
 ) *Keeper {
 	// set KeyTable if it has not already been set
@@ -48,6 +50,7 @@ func NewKeeper(
 		accountKeeper:    accountKeeper,
 		oracleKeeper:     oracleKeeper,
 		rnsKeeper:        rnsKeeper,
+		stakingKeeper:    stakingKeeper,
 		feeCollectorName: feeCollectorName,
 	}
 }
