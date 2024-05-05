@@ -25,13 +25,15 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = descriptor.ForMessage
-var _ = metadata.Join
+var (
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = descriptor.ForMessage
+	_ = metadata.Join
+)
 
 func request_Query_Params_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryParamsRequest
@@ -39,7 +41,6 @@ func request_Query_Params_0(ctx context.Context, marshaler runtime.Marshaler, cl
 
 	msg, err := client.Params(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Params_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -48,7 +49,6 @@ func local_request_Query_Params_0(ctx context.Context, marshaler runtime.Marshal
 
 	msg, err := server.Params(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Contracts_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -68,14 +68,12 @@ func request_Query_Contracts_0(ctx context.Context, marshaler runtime.Marshaler,
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := client.Contracts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Contracts_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -95,19 +93,15 @@ func local_request_Query_Contracts_0(ctx context.Context, marshaler runtime.Mars
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := server.Contracts(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_ContractsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_ContractsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_ContractsAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllContractsRequest
@@ -122,7 +116,6 @@ func request_Query_ContractsAll_0(ctx context.Context, marshaler runtime.Marshal
 
 	msg, err := client.ContractsAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ContractsAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -138,7 +131,6 @@ func local_request_Query_ContractsAll_0(ctx context.Context, marshaler runtime.M
 
 	msg, err := server.ContractsAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_ActiveDeals_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -158,14 +150,12 @@ func request_Query_ActiveDeals_0(ctx context.Context, marshaler runtime.Marshale
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := client.ActiveDeals(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ActiveDeals_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -185,19 +175,15 @@ func local_request_Query_ActiveDeals_0(ctx context.Context, marshaler runtime.Ma
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := server.ActiveDeals(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_ActiveDealsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_ActiveDealsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_ActiveDealsAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllActiveDealsRequest
@@ -212,7 +198,6 @@ func request_Query_ActiveDealsAll_0(ctx context.Context, marshaler runtime.Marsh
 
 	msg, err := client.ActiveDealsAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ActiveDealsAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -228,12 +213,9 @@ func local_request_Query_ActiveDealsAll_0(ctx context.Context, marshaler runtime
 
 	msg, err := server.ActiveDealsAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_InternalActiveDealsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_InternalActiveDealsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_InternalActiveDealsAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllInternalActiveDealsRequest
@@ -248,7 +230,6 @@ func request_Query_InternalActiveDealsAll_0(ctx context.Context, marshaler runti
 
 	msg, err := client.InternalActiveDealsAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_InternalActiveDealsAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -264,7 +245,6 @@ func local_request_Query_InternalActiveDealsAll_0(ctx context.Context, marshaler
 
 	msg, err := server.InternalActiveDealsAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Providers_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -284,14 +264,12 @@ func request_Query_Providers_0(ctx context.Context, marshaler runtime.Marshaler,
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.Providers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Providers_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -311,19 +289,15 @@ func local_request_Query_Providers_0(ctx context.Context, marshaler runtime.Mars
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.Providers(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_ProvidersAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_ProvidersAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_ProvidersAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllProvidersRequest
@@ -338,7 +312,6 @@ func request_Query_ProvidersAll_0(ctx context.Context, marshaler runtime.Marshal
 
 	msg, err := client.ProvidersAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ProvidersAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -354,7 +327,6 @@ func local_request_Query_ProvidersAll_0(ctx context.Context, marshaler runtime.M
 
 	msg, err := server.ProvidersAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Attestation_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -374,14 +346,12 @@ func request_Query_Attestation_0(ctx context.Context, marshaler runtime.Marshale
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := client.Attestation(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Attestation_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -401,19 +371,15 @@ func local_request_Query_Attestation_0(ctx context.Context, marshaler runtime.Ma
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := server.Attestation(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_AttestationsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_AttestationsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_AttestationsAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllAttestationsRequest
@@ -428,7 +394,6 @@ func request_Query_AttestationsAll_0(ctx context.Context, marshaler runtime.Mars
 
 	msg, err := client.AttestationsAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_AttestationsAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -444,7 +409,6 @@ func local_request_Query_AttestationsAll_0(ctx context.Context, marshaler runtim
 
 	msg, err := server.AttestationsAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Reports_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -464,14 +428,12 @@ func request_Query_Reports_0(ctx context.Context, marshaler runtime.Marshaler, c
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := client.Reports(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Reports_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -491,19 +453,15 @@ func local_request_Query_Reports_0(ctx context.Context, marshaler runtime.Marsha
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := server.Reports(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_ReportsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_ReportsAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_ReportsAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllReportRequest
@@ -518,7 +476,6 @@ func request_Query_ReportsAll_0(ctx context.Context, marshaler runtime.Marshaler
 
 	msg, err := client.ReportsAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ReportsAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -534,7 +491,6 @@ func local_request_Query_ReportsAll_0(ctx context.Context, marshaler runtime.Mar
 
 	msg, err := server.ReportsAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Freespace_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -554,14 +510,12 @@ func request_Query_Freespace_0(ctx context.Context, marshaler runtime.Marshaler,
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.Freespace(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Freespace_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -581,14 +535,12 @@ func local_request_Query_Freespace_0(ctx context.Context, marshaler runtime.Mars
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.Freespace(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_StoreCount_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -608,14 +560,12 @@ func request_Query_StoreCount_0(ctx context.Context, marshaler runtime.Marshaler
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.StoreCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_StoreCount_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -635,14 +585,12 @@ func local_request_Query_StoreCount_0(ctx context.Context, marshaler runtime.Mar
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.StoreCount(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_FindFile_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -662,14 +610,12 @@ func request_Query_FindFile_0(ctx context.Context, marshaler runtime.Marshaler, 
 	}
 
 	protoReq.Fid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fid", err)
 	}
 
 	msg, err := client.FindFile(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_FindFile_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -689,14 +635,12 @@ func local_request_Query_FindFile_0(ctx context.Context, marshaler runtime.Marsh
 	}
 
 	protoReq.Fid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fid", err)
 	}
 
 	msg, err := server.FindFile(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_Strays_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -716,14 +660,12 @@ func request_Query_Strays_0(ctx context.Context, marshaler runtime.Marshaler, cl
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := client.Strays(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_Strays_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -743,19 +685,15 @@ func local_request_Query_Strays_0(ctx context.Context, marshaler runtime.Marshal
 	}
 
 	protoReq.Cid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cid", err)
 	}
 
 	msg, err := server.Strays(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_StraysAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_StraysAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_StraysAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllStraysRequest
@@ -770,7 +708,6 @@ func request_Query_StraysAll_0(ctx context.Context, marshaler runtime.Marshaler,
 
 	msg, err := client.StraysAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_StraysAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -786,7 +723,6 @@ func local_request_Query_StraysAll_0(ctx context.Context, marshaler runtime.Mars
 
 	msg, err := server.StraysAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_GetClientFreeSpace_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -806,14 +742,12 @@ func request_Query_GetClientFreeSpace_0(ctx context.Context, marshaler runtime.M
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.GetClientFreeSpace(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_GetClientFreeSpace_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -833,14 +767,12 @@ func local_request_Query_GetClientFreeSpace_0(ctx context.Context, marshaler run
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.GetClientFreeSpace(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_FidCid_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -860,14 +792,12 @@ func request_Query_FidCid_0(ctx context.Context, marshaler runtime.Marshaler, cl
 	}
 
 	protoReq.Fid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fid", err)
 	}
 
 	msg, err := client.FidCid(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_FidCid_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -887,19 +817,15 @@ func local_request_Query_FidCid_0(ctx context.Context, marshaler runtime.Marshal
 	}
 
 	protoReq.Fid, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fid", err)
 	}
 
 	msg, err := server.FidCid(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_FidCidAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_FidCidAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_FidCidAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllFidCidRequest
@@ -914,7 +840,6 @@ func request_Query_FidCidAll_0(ctx context.Context, marshaler runtime.Marshaler,
 
 	msg, err := client.FidCidAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_FidCidAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -930,7 +855,6 @@ func local_request_Query_FidCidAll_0(ctx context.Context, marshaler runtime.Mars
 
 	msg, err := server.FidCidAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_GetPayData_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -950,14 +874,12 @@ func request_Query_GetPayData_0(ctx context.Context, marshaler runtime.Marshaler
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.GetPayData(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_GetPayData_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -977,14 +899,12 @@ func local_request_Query_GetPayData_0(ctx context.Context, marshaler runtime.Mar
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.GetPayData(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_StoragePaymentInfo_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1004,14 +924,12 @@ func request_Query_StoragePaymentInfo_0(ctx context.Context, marshaler runtime.M
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := client.StoragePaymentInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_StoragePaymentInfo_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1031,19 +949,15 @@ func local_request_Query_StoragePaymentInfo_0(ctx context.Context, marshaler run
 	}
 
 	protoReq.Address, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "address", err)
 	}
 
 	msg, err := server.StoragePaymentInfo(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_StoragePaymentInfoAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_StoragePaymentInfoAll_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_StoragePaymentInfoAll_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryAllStoragePaymentInfoRequest
@@ -1058,7 +972,6 @@ func request_Query_StoragePaymentInfoAll_0(ctx context.Context, marshaler runtim
 
 	msg, err := client.StoragePaymentInfoAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_StoragePaymentInfoAll_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1074,12 +987,9 @@ func local_request_Query_StoragePaymentInfoAll_0(ctx context.Context, marshaler 
 
 	msg, err := server.StoragePaymentInfoAll(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_Query_FileUploadCheck_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_Query_FileUploadCheck_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Query_FileUploadCheck_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryFileUploadCheckRequest
@@ -1094,7 +1004,6 @@ func request_Query_FileUploadCheck_0(ctx context.Context, marshaler runtime.Mars
 
 	msg, err := client.FileUploadCheck(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_FileUploadCheck_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1110,7 +1019,6 @@ func local_request_Query_FileUploadCheck_0(ctx context.Context, marshaler runtim
 
 	msg, err := server.FileUploadCheck(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1130,7 +1038,6 @@ func request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Marshaler
 	}
 
 	protoReq.Duration, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "duration", err)
 	}
@@ -1141,14 +1048,12 @@ func request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Marshaler
 	}
 
 	protoReq.Bytes, err = runtime.Int64(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "bytes", err)
 	}
 
 	msg, err := client.PriceCheck(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1168,7 +1073,6 @@ func local_request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Mar
 	}
 
 	protoReq.Duration, err = runtime.String(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "duration", err)
 	}
@@ -1179,14 +1083,12 @@ func local_request_Query_PriceCheck_0(ctx context.Context, marshaler runtime.Mar
 	}
 
 	protoReq.Bytes, err = runtime.Int64(val)
-
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "bytes", err)
 	}
 
 	msg, err := server.PriceCheck(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_ActiveProviders_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1195,7 +1097,6 @@ func request_Query_ActiveProviders_0(ctx context.Context, marshaler runtime.Mars
 
 	msg, err := client.ActiveProviders(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_ActiveProviders_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1204,7 +1105,6 @@ func local_request_Query_ActiveProviders_0(ctx context.Context, marshaler runtim
 
 	msg, err := server.ActiveProviders(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_Query_StorageStats_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1213,7 +1113,6 @@ func request_Query_StorageStats_0(ctx context.Context, marshaler runtime.Marshal
 
 	msg, err := client.StorageStats(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_Query_StorageStats_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1222,7 +1121,6 @@ func local_request_Query_StorageStats_0(ctx context.Context, marshaler runtime.M
 
 	msg, err := server.StorageStats(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 // RegisterQueryHandlerServer registers the http handlers for service Query to "mux".
@@ -1230,7 +1128,6 @@ func local_request_Query_StorageStats_0(ctx context.Context, marshaler runtime.M
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterQueryHandlerFromEndpoint instead.
 func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, server QueryServer) error {
-
 	mux.Handle("GET", pattern_Query_Params_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1251,7 +1148,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Params_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Contracts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1274,7 +1170,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Contracts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ContractsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1297,7 +1192,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ContractsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveDeals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1320,7 +1214,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ActiveDeals_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveDealsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1343,7 +1236,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ActiveDealsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_InternalActiveDealsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1366,7 +1258,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_InternalActiveDealsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Providers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1389,7 +1280,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Providers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ProvidersAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1412,7 +1302,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ProvidersAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Attestation_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1435,7 +1324,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Attestation_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_AttestationsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1458,7 +1346,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_AttestationsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Reports_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1481,7 +1368,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Reports_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ReportsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1504,7 +1390,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ReportsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Freespace_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1527,7 +1412,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Freespace_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoreCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1550,7 +1434,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_StoreCount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FindFile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1573,7 +1456,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_FindFile_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Strays_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1596,7 +1478,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_Strays_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StraysAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1619,7 +1500,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_StraysAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_GetClientFreeSpace_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1642,7 +1522,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_GetClientFreeSpace_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FidCid_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1665,7 +1544,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_FidCid_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FidCidAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1688,7 +1566,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_FidCidAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_GetPayData_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1711,7 +1588,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_GetPayData_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoragePaymentInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1734,7 +1610,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_StoragePaymentInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoragePaymentInfoAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1757,7 +1632,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_StoragePaymentInfoAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FileUploadCheck_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1780,7 +1654,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_FileUploadCheck_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_PriceCheck_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1803,7 +1676,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_PriceCheck_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveProviders_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1826,7 +1698,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_ActiveProviders_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StorageStats_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1849,7 +1720,6 @@ func RegisterQueryHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Query_StorageStats_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	return nil
@@ -1892,7 +1762,6 @@ func RegisterQueryHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "QueryClient" to call the correct interceptors.
 func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, client QueryClient) error {
-
 	mux.Handle("GET", pattern_Query_Params_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1910,7 +1779,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Params_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Contracts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1930,7 +1798,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Contracts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ContractsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1950,7 +1817,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ContractsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveDeals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1970,7 +1836,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ActiveDeals_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveDealsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1990,7 +1855,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ActiveDealsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_InternalActiveDealsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2010,7 +1874,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_InternalActiveDealsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Providers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2030,7 +1893,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Providers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ProvidersAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2050,7 +1912,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ProvidersAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Attestation_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2070,7 +1931,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Attestation_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_AttestationsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2090,7 +1950,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_AttestationsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Reports_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2110,7 +1969,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Reports_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ReportsAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2130,7 +1988,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ReportsAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Freespace_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2150,7 +2007,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Freespace_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoreCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2170,7 +2026,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_StoreCount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FindFile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2190,7 +2045,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_FindFile_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_Strays_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2210,7 +2064,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_Strays_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StraysAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2230,7 +2083,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_StraysAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_GetClientFreeSpace_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2250,7 +2102,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_GetClientFreeSpace_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FidCid_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2270,7 +2121,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_FidCid_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FidCidAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2290,7 +2140,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_FidCidAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_GetPayData_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2310,7 +2159,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_GetPayData_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoragePaymentInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2330,7 +2178,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_StoragePaymentInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StoragePaymentInfoAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2350,7 +2197,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_StoragePaymentInfoAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_FileUploadCheck_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2370,7 +2216,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_FileUploadCheck_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_PriceCheck_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2390,7 +2235,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_PriceCheck_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_ActiveProviders_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2410,7 +2254,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_ActiveProviders_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	mux.Handle("GET", pattern_Query_StorageStats_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2430,7 +2273,6 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 
 		forward_Query_StorageStats_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	return nil

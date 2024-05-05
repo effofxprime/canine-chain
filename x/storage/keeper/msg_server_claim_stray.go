@@ -30,47 +30,46 @@ func (k msgServer) ClaimStray(goCtx context.Context, msg *types.MsgClaimStray) (
 		}
 	}
 
-	size := sdk.NewInt(int64(stray.Size()))
+	deal := activeDealsPool.Get().(*types.ActiveDeals)
+	deal.Cid = stray.Cid
+	deal.Signee = stray.Signee
+	deal.Provider = msg.ForAddress
+	deal.Creator = msg.Creator
+	deal.Fid = stray.Fid
+	deal.Merkle = stray.Merkle
 
-	pieces := size.Quo(sdk.NewInt(k.GetParams(ctx).ChunkSize))
-
-	var pieceToStart int64
-
-	if !pieces.IsZero() {
-		pieceToStart = ctx.BlockHeight() % pieces.Int64()
+	size, ok := sdk.NewIntFromString(stray.Filesize)
+	if !ok {
+		activeDealsPool.Put(deal)
+		return nil, fmt.Errorf("failed to parse filesize: %s %v", "%t", ok)
 	}
+
+	if size.IsZero() {
+		activeDealsPool.Put(deal)
+		return nil, fmt.Errorf("filesize is nil")
+	}
+	pieces := size.Quo(sdk.NewInt(k.GetParams(ctx).ChunkSize))
+	deal.Startblock = fmt.Sprintf("%d", ctx.BlockHeight())
+	deal.Endblock = fmt.Sprintf("%d", stray.End)
+	deal.Filesize = stray.Filesize
+	deal.LastProof = ctx.BlockHeight()
+	deal.Blocktoprove = fmt.Sprintf("%d", ctx.BlockHeight()%pieces.Int64())
+	deal.Proofsmissed = "0"
 
 	if msg.ForAddress != msg.Creator {
-		found := false
 		for _, claimer := range provider.AuthClaimers {
 			if claimer == msg.Creator {
-				found = true
+				k.SetActiveDeals(ctx, *deal)
+				activeDealsPool.Put(deal)
+				return &types.MsgClaimStrayResponse{}, nil
 			}
 		}
-		if !found {
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "cannot claim a stray for someone else")
-		}
-
+		activeDealsPool.Put(deal)
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "cannot claim a stray for someone else")
 	}
 
-	deal := types.ActiveDeals{
-		Cid:          stray.Cid,
-		Signee:       stray.Signee,
-		Provider:     msg.ForAddress,
-		Startblock:   fmt.Sprintf("%d", ctx.BlockHeight()),
-		Endblock:     fmt.Sprintf("%d", stray.End),
-		Filesize:     stray.Filesize,
-		LastProof:    ctx.BlockHeight(),
-		Blocktoprove: fmt.Sprintf("%d", pieceToStart),
-		Creator:      msg.Creator,
-		Proofsmissed: "0",
-		Merkle:       stray.Merkle,
-		Fid:          stray.Fid,
-	}
-
-	k.SetActiveDeals(ctx, deal)
-
-	k.RemoveStrays(ctx, stray.Cid)
+	k.SetActiveDeals(ctx, *deal)
+	activeDealsPool.Put(deal)
 
 	return &types.MsgClaimStrayResponse{}, nil
 }

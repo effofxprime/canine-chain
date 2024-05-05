@@ -65,10 +65,16 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 	genesis.Params = k.GetParams(ctx)
 
+	// Copy the Strays objects into a new slice
+	straysList := make([]types.Strays, len(k.GetAllStrays(ctx)))
+	for i, stray := range k.GetAllStrays(ctx) {
+		straysList[i] = *stray
+	}
+
 	genesis.ContractsList = k.GetAllContracts(ctx)
 	genesis.ActiveDealsList = k.GetAllActiveDeals(ctx)
 	genesis.ProvidersList = k.GetAllProviders(ctx)
-	genesis.StraysList = k.GetAllStrays(ctx)
+	genesis.StraysList = straysList
 	genesis.FidCidList = k.GetAllFidCid(ctx)
 	genesis.PaymentInfoList = k.GetAllStoragePaymentInfo(ctx)
 	genesis.CollateralList = k.GetAllCollateral(ctx)

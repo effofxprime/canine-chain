@@ -6,6 +6,10 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	io "io"
+	math "math"
+	math_bits "math/bits"
+
 	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
@@ -14,15 +18,14 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	io "io"
-	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
-var _ = fmt.Errorf
-var _ = math.Inf
+var (
+	_ = proto.Marshal
+	_ = fmt.Errorf
+	_ = math.Inf
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -31,8 +34,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
-type QueryParamsRequest struct {
-}
+type QueryParamsRequest struct{}
 
 func (m *QueryParamsRequest) Reset()         { *m = QueryParamsRequest{} }
 func (m *QueryParamsRequest) String() string { return proto.CompactTextString(m) }
@@ -40,9 +42,11 @@ func (*QueryParamsRequest) ProtoMessage()    {}
 func (*QueryParamsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{0}
 }
+
 func (m *QueryParamsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryParamsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryParamsRequest.Marshal(b, m, deterministic)
@@ -55,12 +59,15 @@ func (m *QueryParamsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
+
 func (m *QueryParamsRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryParamsRequest.Merge(m, src)
 }
+
 func (m *QueryParamsRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryParamsRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryParamsRequest.DiscardUnknown(m)
 }
@@ -79,9 +86,11 @@ func (*QueryParamsResponse) ProtoMessage()    {}
 func (*QueryParamsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{1}
 }
+
 func (m *QueryParamsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryParamsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryParamsResponse.Marshal(b, m, deterministic)
@@ -94,12 +103,15 @@ func (m *QueryParamsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
+
 func (m *QueryParamsResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryParamsResponse.Merge(m, src)
 }
+
 func (m *QueryParamsResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryParamsResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryParamsResponse.DiscardUnknown(m)
 }
@@ -124,9 +136,11 @@ func (*QueryGetNotificationsRequest) ProtoMessage()    {}
 func (*QueryGetNotificationsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{2}
 }
+
 func (m *QueryGetNotificationsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryGetNotificationsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryGetNotificationsRequest.Marshal(b, m, deterministic)
@@ -139,12 +153,15 @@ func (m *QueryGetNotificationsRequest) XXX_Marshal(b []byte, deterministic bool)
 		return b[:n], nil
 	}
 }
+
 func (m *QueryGetNotificationsRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryGetNotificationsRequest.Merge(m, src)
 }
+
 func (m *QueryGetNotificationsRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryGetNotificationsRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryGetNotificationsRequest.DiscardUnknown(m)
 }
@@ -175,9 +192,11 @@ func (*QueryGetNotificationsResponse) ProtoMessage()    {}
 func (*QueryGetNotificationsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{3}
 }
+
 func (m *QueryGetNotificationsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryGetNotificationsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryGetNotificationsResponse.Marshal(b, m, deterministic)
@@ -190,12 +209,15 @@ func (m *QueryGetNotificationsResponse) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
+
 func (m *QueryGetNotificationsResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryGetNotificationsResponse.Merge(m, src)
 }
+
 func (m *QueryGetNotificationsResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryGetNotificationsResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryGetNotificationsResponse.DiscardUnknown(m)
 }
@@ -219,9 +241,11 @@ func (*QueryAllNotificationsRequest) ProtoMessage()    {}
 func (*QueryAllNotificationsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{4}
 }
+
 func (m *QueryAllNotificationsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotificationsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotificationsRequest.Marshal(b, m, deterministic)
@@ -234,12 +258,15 @@ func (m *QueryAllNotificationsRequest) XXX_Marshal(b []byte, deterministic bool)
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotificationsRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotificationsRequest.Merge(m, src)
 }
+
 func (m *QueryAllNotificationsRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotificationsRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotificationsRequest.DiscardUnknown(m)
 }
@@ -264,9 +291,11 @@ func (*QueryAllNotificationsResponse) ProtoMessage()    {}
 func (*QueryAllNotificationsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{5}
 }
+
 func (m *QueryAllNotificationsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotificationsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotificationsResponse.Marshal(b, m, deterministic)
@@ -279,12 +308,15 @@ func (m *QueryAllNotificationsResponse) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotificationsResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotificationsResponse.Merge(m, src)
 }
+
 func (m *QueryAllNotificationsResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotificationsResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotificationsResponse.DiscardUnknown(m)
 }
@@ -316,9 +348,11 @@ func (*QueryAllNotificationsByAddressRequest) ProtoMessage()    {}
 func (*QueryAllNotificationsByAddressRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{6}
 }
+
 func (m *QueryAllNotificationsByAddressRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotificationsByAddressRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotificationsByAddressRequest.Marshal(b, m, deterministic)
@@ -331,12 +365,15 @@ func (m *QueryAllNotificationsByAddressRequest) XXX_Marshal(b []byte, determinis
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotificationsByAddressRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotificationsByAddressRequest.Merge(m, src)
 }
+
 func (m *QueryAllNotificationsByAddressRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotificationsByAddressRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotificationsByAddressRequest.DiscardUnknown(m)
 }
@@ -370,9 +407,11 @@ func (*QueryAllNotificationsByAddressResponse) ProtoMessage()    {}
 func (*QueryAllNotificationsByAddressResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{7}
 }
+
 func (m *QueryAllNotificationsByAddressResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotificationsByAddressResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotificationsByAddressResponse.Marshal(b, m, deterministic)
@@ -385,12 +424,15 @@ func (m *QueryAllNotificationsByAddressResponse) XXX_Marshal(b []byte, determini
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotificationsByAddressResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotificationsByAddressResponse.Merge(m, src)
 }
+
 func (m *QueryAllNotificationsByAddressResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotificationsByAddressResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotificationsByAddressResponse.DiscardUnknown(m)
 }
@@ -421,9 +463,11 @@ func (*QueryGetNotiCounterRequest) ProtoMessage()    {}
 func (*QueryGetNotiCounterRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{8}
 }
+
 func (m *QueryGetNotiCounterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryGetNotiCounterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryGetNotiCounterRequest.Marshal(b, m, deterministic)
@@ -436,12 +480,15 @@ func (m *QueryGetNotiCounterRequest) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
+
 func (m *QueryGetNotiCounterRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryGetNotiCounterRequest.Merge(m, src)
 }
+
 func (m *QueryGetNotiCounterRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryGetNotiCounterRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryGetNotiCounterRequest.DiscardUnknown(m)
 }
@@ -465,9 +512,11 @@ func (*QueryGetNotiCounterResponse) ProtoMessage()    {}
 func (*QueryGetNotiCounterResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{9}
 }
+
 func (m *QueryGetNotiCounterResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryGetNotiCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryGetNotiCounterResponse.Marshal(b, m, deterministic)
@@ -480,12 +529,15 @@ func (m *QueryGetNotiCounterResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
+
 func (m *QueryGetNotiCounterResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryGetNotiCounterResponse.Merge(m, src)
 }
+
 func (m *QueryGetNotiCounterResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryGetNotiCounterResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryGetNotiCounterResponse.DiscardUnknown(m)
 }
@@ -509,9 +561,11 @@ func (*QueryAllNotiCounterRequest) ProtoMessage()    {}
 func (*QueryAllNotiCounterRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{10}
 }
+
 func (m *QueryAllNotiCounterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotiCounterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotiCounterRequest.Marshal(b, m, deterministic)
@@ -524,12 +578,15 @@ func (m *QueryAllNotiCounterRequest) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotiCounterRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotiCounterRequest.Merge(m, src)
 }
+
 func (m *QueryAllNotiCounterRequest) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotiCounterRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotiCounterRequest.DiscardUnknown(m)
 }
@@ -554,9 +611,11 @@ func (*QueryAllNotiCounterResponse) ProtoMessage()    {}
 func (*QueryAllNotiCounterResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0e7e3c82750b3d9e, []int{11}
 }
+
 func (m *QueryAllNotiCounterResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *QueryAllNotiCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_QueryAllNotiCounterResponse.Marshal(b, m, deterministic)
@@ -569,12 +628,15 @@ func (m *QueryAllNotiCounterResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
+
 func (m *QueryAllNotiCounterResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_QueryAllNotiCounterResponse.Merge(m, src)
 }
+
 func (m *QueryAllNotiCounterResponse) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *QueryAllNotiCounterResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_QueryAllNotiCounterResponse.DiscardUnknown(m)
 }
@@ -665,8 +727,10 @@ var fileDescriptor_0e7e3c82750b3d9e = []byte{
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
+var (
+	_ context.Context
+	_ grpc.ClientConn
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
@@ -769,24 +833,28 @@ type QueryServer interface {
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
-type UnimplementedQueryServer struct {
-}
+type UnimplementedQueryServer struct{}
 
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
 }
+
 func (*UnimplementedQueryServer) Notifications(ctx context.Context, req *QueryGetNotificationsRequest) (*QueryGetNotificationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Notifications not implemented")
 }
+
 func (*UnimplementedQueryServer) NotificationsAll(ctx context.Context, req *QueryAllNotificationsRequest) (*QueryAllNotificationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotificationsAll not implemented")
 }
+
 func (*UnimplementedQueryServer) NotificationsByAddress(ctx context.Context, req *QueryAllNotificationsByAddressRequest) (*QueryAllNotificationsByAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotificationsByAddress not implemented")
 }
+
 func (*UnimplementedQueryServer) NotiCounter(ctx context.Context, req *QueryGetNotiCounterRequest) (*QueryGetNotiCounterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotiCounter not implemented")
 }
+
 func (*UnimplementedQueryServer) NotiCounterAll(ctx context.Context, req *QueryAllNotiCounterRequest) (*QueryAllNotiCounterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotiCounterAll not implemented")
 }
@@ -1393,6 +1461,7 @@ func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+
 func (m *QueryParamsRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1567,9 +1636,11 @@ func (m *QueryAllNotiCounterResponse) Size() (n int) {
 func sovQuery(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
+
 func sozQuery(x uint64) (n int) {
 	return sovQuery(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
+
 func (m *QueryParamsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1620,6 +1691,7 @@ func (m *QueryParamsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1703,6 +1775,7 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryGetNotificationsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1804,6 +1877,7 @@ func (m *QueryGetNotificationsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryGetNotificationsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1887,6 +1961,7 @@ func (m *QueryGetNotificationsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotificationsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1973,6 +2048,7 @@ func (m *QueryAllNotificationsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotificationsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2093,6 +2169,7 @@ func (m *QueryAllNotificationsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotificationsByAddressRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2211,6 +2288,7 @@ func (m *QueryAllNotificationsByAddressRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotificationsByAddressResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2331,6 +2409,7 @@ func (m *QueryAllNotificationsByAddressResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryGetNotiCounterRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2413,6 +2492,7 @@ func (m *QueryGetNotiCounterRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryGetNotiCounterResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2496,6 +2576,7 @@ func (m *QueryGetNotiCounterResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotiCounterRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2582,6 +2663,7 @@ func (m *QueryAllNotiCounterRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *QueryAllNotiCounterResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2702,6 +2784,7 @@ func (m *QueryAllNotiCounterResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func skipQuery(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0

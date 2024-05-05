@@ -5,16 +5,19 @@ package types
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"
+
+	proto "github.com/gogo/protobuf/proto"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
-var _ = fmt.Errorf
-var _ = math.Inf
+var (
+	_ = proto.Marshal
+	_ = fmt.Errorf
+	_ = math.Inf
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -38,9 +41,11 @@ func (*Providers) ProtoMessage()    {}
 func (*Providers) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{0}
 }
+
 func (m *Providers) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *Providers) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Providers.Marshal(b, m, deterministic)
@@ -53,12 +58,15 @@ func (m *Providers) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
+
 func (m *Providers) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Providers.Merge(m, src)
 }
+
 func (m *Providers) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *Providers) XXX_DiscardUnknown() {
 	xxx_messageInfo_Providers.DiscardUnknown(m)
 }
@@ -124,9 +132,11 @@ func (*ActiveProviders) ProtoMessage()    {}
 func (*ActiveProviders) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{1}
 }
+
 func (m *ActiveProviders) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *ActiveProviders) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_ActiveProviders.Marshal(b, m, deterministic)
@@ -139,12 +149,15 @@ func (m *ActiveProviders) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
+
 func (m *ActiveProviders) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ActiveProviders.Merge(m, src)
 }
+
 func (m *ActiveProviders) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *ActiveProviders) XXX_DiscardUnknown() {
 	xxx_messageInfo_ActiveProviders.DiscardUnknown(m)
 }
@@ -169,9 +182,11 @@ func (*Attestation) ProtoMessage()    {}
 func (*Attestation) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{2}
 }
+
 func (m *Attestation) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *Attestation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Attestation.Marshal(b, m, deterministic)
@@ -184,12 +199,15 @@ func (m *Attestation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
+
 func (m *Attestation) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Attestation.Merge(m, src)
 }
+
 func (m *Attestation) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *Attestation) XXX_DiscardUnknown() {
 	xxx_messageInfo_Attestation.DiscardUnknown(m)
 }
@@ -221,9 +239,11 @@ func (*AttestationForm) ProtoMessage()    {}
 func (*AttestationForm) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{3}
 }
+
 func (m *AttestationForm) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *AttestationForm) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_AttestationForm.Marshal(b, m, deterministic)
@@ -236,12 +256,15 @@ func (m *AttestationForm) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
+
 func (m *AttestationForm) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AttestationForm.Merge(m, src)
 }
+
 func (m *AttestationForm) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *AttestationForm) XXX_DiscardUnknown() {
 	xxx_messageInfo_AttestationForm.DiscardUnknown(m)
 }
@@ -273,9 +296,11 @@ func (*ReportForm) ProtoMessage()    {}
 func (*ReportForm) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{4}
 }
+
 func (m *ReportForm) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *ReportForm) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_ReportForm.Marshal(b, m, deterministic)
@@ -288,12 +313,15 @@ func (m *ReportForm) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
+
 func (m *ReportForm) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ReportForm.Merge(m, src)
 }
+
 func (m *ReportForm) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *ReportForm) XXX_DiscardUnknown() {
 	xxx_messageInfo_ReportForm.DiscardUnknown(m)
 }
@@ -325,9 +353,11 @@ func (*Collateral) ProtoMessage()    {}
 func (*Collateral) Descriptor() ([]byte, []int) {
 	return fileDescriptor_bf0b782528f3c2f0, []int{5}
 }
+
 func (m *Collateral) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *Collateral) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Collateral.Marshal(b, m, deterministic)
@@ -340,12 +370,15 @@ func (m *Collateral) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
+
 func (m *Collateral) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Collateral.Merge(m, src)
 }
+
 func (m *Collateral) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *Collateral) XXX_DiscardUnknown() {
 	xxx_messageInfo_Collateral.DiscardUnknown(m)
 }
@@ -687,6 +720,7 @@ func encodeVarintProviders(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+
 func (m *Providers) Size() (n int) {
 	if m == nil {
 		return 0
@@ -812,9 +846,11 @@ func (m *Collateral) Size() (n int) {
 func sovProviders(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
+
 func sozProviders(x uint64) (n int) {
 	return sovProviders(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
+
 func (m *Providers) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1089,6 +1125,7 @@ func (m *Providers) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *ActiveProviders) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1171,6 +1208,7 @@ func (m *ActiveProviders) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *Attestation) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1273,6 +1311,7 @@ func (m *Attestation) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *AttestationForm) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1389,6 +1428,7 @@ func (m *AttestationForm) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *ReportForm) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1505,6 +1545,7 @@ func (m *ReportForm) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func (m *Collateral) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1606,6 +1647,7 @@ func (m *Collateral) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func skipProviders(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0

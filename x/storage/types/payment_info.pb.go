@@ -5,21 +5,24 @@ package types
 
 import (
 	fmt "fmt"
-	_ "github.com/cosmos/gogoproto/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	_ "github.com/gogo/protobuf/types"
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"
 	time "time"
+
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/gogo/protobuf/types"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
-var _ = fmt.Errorf
-var _ = math.Inf
-var _ = time.Kitchen
+var (
+	_ = proto.Marshal
+	_ = fmt.Errorf
+	_ = math.Inf
+	_ = time.Kitchen
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -41,9 +44,11 @@ func (*StoragePaymentInfo) ProtoMessage()    {}
 func (*StoragePaymentInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_b1e2face38d88409, []int{0}
 }
+
 func (m *StoragePaymentInfo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
+
 func (m *StoragePaymentInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_StoragePaymentInfo.Marshal(b, m, deterministic)
@@ -56,12 +61,15 @@ func (m *StoragePaymentInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
+
 func (m *StoragePaymentInfo) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StoragePaymentInfo.Merge(m, src)
 }
+
 func (m *StoragePaymentInfo) XXX_Size() int {
 	return m.Size()
 }
+
 func (m *StoragePaymentInfo) XXX_DiscardUnknown() {
 	xxx_messageInfo_StoragePaymentInfo.DiscardUnknown(m)
 }
@@ -202,6 +210,7 @@ func encodeVarintPaymentInfo(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+
 func (m *StoragePaymentInfo) Size() (n int) {
 	if m == nil {
 		return 0
@@ -228,9 +237,11 @@ func (m *StoragePaymentInfo) Size() (n int) {
 func sovPaymentInfo(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
+
 func sozPaymentInfo(x uint64) (n int) {
 	return sovPaymentInfo(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
+
 func (m *StoragePaymentInfo) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -417,6 +428,7 @@ func (m *StoragePaymentInfo) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+
 func skipPaymentInfo(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
