@@ -19,29 +19,33 @@ export GO111MODULE = on
 ###############################################################################
 ###                          Go Toolchain Handling                          ###
 ###############################################################################
-# This block extracts the 'toolchain' version from go.mod. If not found, we
-# default to the system's 'go'. If found, we check if that toolchain version
-# is installed; if not, we install it via golang.org/dl. This ensures consistent
-# builds without altering the user's global Go installation.
+# This block extracts the desired toolchain version from go.mod (e.g., "go1.23.1").
+# It then displays both the current Go version and the expected one. If the expected
+# version is not already active (or in PATH), it installs it using golang.org/dl.
 #
-# Edge case: If the user installed goX.Y.Z in a non-standard location not in PATH,
-# we won't detect it and will install a second copy. That's intentional.
+# Note: The toolchain version is expected to be defined exactly as the desired binary
+# name (e.g., "go1.23.1"). This section does not alter the go.mod syntax.
+CURRENT_GO_VERSION := $(shell go version)
+$(info Current Golang Version: $(CURRENT_GO_VERSION))
 
 TOOLCHAIN_GO_VERSION := $(shell grep '^toolchain' go.mod | awk '{print $$2}')
-GO_CMD := go
-
-ifeq ($(TOOLCHAIN_GO_VERSION),)
-  $(info No toolchain version specified in go.mod. Using default 'go' command.)
-else
+ifneq ($(TOOLCHAIN_GO_VERSION),)
+  $(info Wanted Golang Version as specified in go.mod: $(TOOLCHAIN_GO_VERSION))
   ifeq ("$(shell which $(TOOLCHAIN_GO_VERSION) 2>/dev/null)","")
     ifeq ("$(shell go version | grep $(TOOLCHAIN_GO_VERSION))","")
-      $(info Current Golang Version: $(shell go version))
-      $(info Installing Go version $(TOOLCHAIN_GO_VERSION) via golang.org/dl)
+      $(info The wanted Golang version was not found. Installing $(TOOLCHAIN_GO_VERSION) via golang.org/dl...)
       $(shell go install golang.org/dl/$(TOOLCHAIN_GO_VERSION)@latest)
       $(shell $(TOOLCHAIN_GO_VERSION) download)
+    else
+      $(info The wanted Golang version is already active.)
     endif
+  else
+    $(info Found $(TOOLCHAIN_GO_VERSION) in PATH.)
   endif
   GO_CMD := $(TOOLCHAIN_GO_VERSION)
+else
+  $(info No toolchain version specified in go.mod. Using default 'go' command.)
+  GO_CMD := go
 endif
 
 # process build tags
@@ -78,15 +82,13 @@ endif
 ###                          PebbleDB Opt-In Logic                          ###
 ###############################################################################
 # If WITH_PEBBLEDB=yes is provided, we enable the 'pebbledb' build tag, add
-# necessary ldflags for Pebble, and append "-pebbledb" to VERSION. We do not
-# modify go.mod here; if you need a separate go-4pebbledb.mod, handle that outside
-# of this Makefile to avoid dirtying the repo.
-
+# necessary ldflags for Pebble, and append "-pebbledb" to VERSION.
+# (Note: if you require a separate go.mod for PebbleDB, handle that externally.)
 ifeq ($(WITH_PEBBLEDB),yes)
   build_tags += pebbledb
   VERSION := $(VERSION)-pebbledb
   ldflags += -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1
-  $(info Applying PebbleDB support. Make sure to use an alternate go-4pebbledb.mod if needed.)
+  $(info Applying PebbleDB support. Make sure to use an alternate go.mod (e.g., go-4pebbledb.mod) if needed.)
 endif
 
 build_tags += $(BUILD_TAGS)
@@ -122,7 +124,6 @@ BUILD_FLAGS := -tags "$(build_tags_comma_sep)" -ldflags '$(ldflags)' -trimpath
 # include contrib/devtools/Makefile
 
 all: install lint test
-	
 
 build: go.sum
 ifeq ($(OS),Windows_NT)
@@ -259,12 +260,9 @@ proto-lint:
 proto-check-breaking:
 	@$(DOCKER_BUF) breaking --against $(HTTPS_GIT)#branch=main
 
-# Note: The following are declared in .PHONY but have no corresponding targets:
-#  - install-debug
-#  - test-build
-#  - proto-update-deps
-# They are placeholders or references for future expansions. They can be removed
-# or defined if needed.
+# Note: The following targets are declared in .PHONY but have no corresponding rules:
+#       - install-debug, test-build, proto-update-deps
+# They are placeholders for future enhancements.
 
 .PHONY: proto-all proto-gen proto-gen-any proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps docs
 .PHONY: all install install-debug go-mod-cache draw-deps clean build format test test-all test-build test-cover test-unit test-race test-sim-import-export local
