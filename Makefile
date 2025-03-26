@@ -4,7 +4,7 @@ PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
 VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
-SDK_PACK := $(shell go list -m github.com/cosmos/cosmos-sdk | sed  's/ /\@/g')
+SDK_PACK := $(shell go list -m github.com/cosmos/cosmos-sdk | sed 's/ /\@/g')
 BINDIR ?= $(GOPATH)/bin
 SIMAPP = ./app
 
@@ -15,6 +15,34 @@ DOCKER_BUF := $(DOCKER) run --platform="linux/amd64" --rm -v $(CURDIR):/workspac
 HTTPS_GIT := https://github.com/jackalLabs/canine-chain.git
 
 export GO111MODULE = on
+
+###############################################################################
+###                          Go Toolchain Handling                          ###
+###############################################################################
+# This block extracts the 'toolchain' version from go.mod. If not found, we
+# default to the system's 'go'. If found, we check if that toolchain version
+# is installed; if not, we install it via golang.org/dl. This ensures consistent
+# builds without altering the user's global Go installation.
+#
+# Edge case: If the user installed goX.Y.Z in a non-standard location not in PATH,
+# we won't detect it and will install a second copy. That's intentional.
+
+TOOLCHAIN_GO_VERSION := $(shell grep '^toolchain' go.mod | awk '{print $$2}')
+GO_CMD := go
+
+ifeq ($(TOOLCHAIN_GO_VERSION),)
+  $(info No toolchain version specified in go.mod. Using default 'go' command.)
+else
+  ifeq ("$(shell which go$(TOOLCHAIN_GO_VERSION) 2>/dev/null)","")
+    ifeq ("$(shell go version | grep $(TOOLCHAIN_GO_VERSION))","")
+      $(info Current Golang Version: $(shell go version))
+      $(info Installing Go version $(TOOLCHAIN_GO_VERSION) via golang.org/dl)
+      $(shell go install golang.org/dl/go$(TOOLCHAIN_GO_VERSION)@latest)
+      $(shell go$(TOOLCHAIN_GO_VERSION) download)
+    endif
+  endif
+  GO_CMD := go$(TOOLCHAIN_GO_VERSION)
+endif
 
 # process build tags
 
@@ -45,6 +73,22 @@ endif
 ifeq ($(WITH_CLEVELDB),yes)
   build_tags += gcc
 endif
+
+###############################################################################
+###                          PebbleDB Opt-In Logic                          ###
+###############################################################################
+# If WITH_PEBBLEDB=yes is provided, we enable the 'pebbledb' build tag, add
+# necessary ldflags for Pebble, and append "-pebbledb" to VERSION. We do not
+# modify go.mod here; if you need a separate go-4pebbledb.mod, handle that outside
+# of this Makefile to avoid dirtying the repo.
+
+ifeq ($(WITH_PEBBLEDB),yes)
+  build_tags += pebbledb
+  VERSION := $(VERSION)-pebbledb
+  ldflags += -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1
+  $(info Applying PebbleDB support. Make sure to use an alternate go-4pebbledb.mod if needed.)
+endif
+
 build_tags += $(BUILD_TAGS)
 build_tags := $(strip $(build_tags))
 
@@ -68,6 +112,7 @@ endif
 ifeq ($(LINK_STATICALLY),true)
 	ldflags += -linkmode=external -extldflags "-Wl,-z,muldefs -static"
 endif
+
 ldflags += $(LDFLAGS)
 ldflags := $(strip $(ldflags))
 
@@ -79,43 +124,40 @@ BUILD_FLAGS := -tags "$(build_tags_comma_sep)" -ldflags '$(ldflags)' -trimpath
 all: install lint test
 	
 
-
 build: go.sum
 ifeq ($(OS),Windows_NT)
 	exit 1
 else
-	go build -mod=readonly $(BUILD_FLAGS) -o build/canined ./cmd/canined
+	$(GO_CMD) build -mod=readonly $(BUILD_FLAGS) -o build/canined ./cmd/canined
 endif
 
-build_cli:
-	go build -o build/canined -mod=readonly -tags "$(GO_TAGS) build/canined" -ldflags '$(LD_FLAGS)' ./cmd/canined
-	
-
+build_cli: build
 
 build-contract-tests-hooks:
 ifeq ($(OS),Windows_NT)
-	go build -mod=readonly $(BUILD_FLAGS) -o build/contract_tests.exe ./cmd/contract_tests
+	$(GO_CMD) build -mod=readonly $(BUILD_FLAGS) -o build/contract_tests.exe ./cmd/contract_tests
 else
-	go build -mod=readonly $(BUILD_FLAGS) -o build/contract_tests ./cmd/contract_tests
+	$(GO_CMD) build -mod=readonly $(BUILD_FLAGS) -o build/contract_tests ./cmd/contract_tests
 endif
 
 install: go.sum
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/canined
+	$(GO_CMD) install -mod=readonly $(BUILD_FLAGS) ./cmd/canined
 
 ########################################
 ### Tools & dependencies
+########################################
 
 go-mod-cache: go.sum
 	@echo "--> Download go modules to local cache"
-	@go mod download
+	@$(GO_CMD) mod download
 
 go.sum: go.mod
 	@echo "--> Ensure dependencies have not been modified"
-	@go mod verify
+	@$(GO_CMD) mod verify
 
 draw-deps:
 	@# requires brew install graphviz or apt-get install graphviz
-	go get github.com/RobotsAndPencils/goviz
+	$(GO_CMD) get github.com/RobotsAndPencils/goviz
 	@goviz -i ./cmd/canined -d 2 | dot -Tpng -o dependency-graph.png
 
 clean:
@@ -126,26 +168,26 @@ distclean: clean
 
 ########################################
 ### Testing
+########################################
 
 local: install
 	./scripts/test-node.sh $(address)
-
 
 test: test-unit
 test-all: test-race test-cover
 test-sim: test-sim-import-export test-sim-full-app
 
 test-unit:
-	@VERSION=$(VERSION) go test -short -mod=readonly -tags='ledger test_ledger_mock' ./...
+	@VERSION=$(VERSION) $(GO_CMD) test -short -mod=readonly -tags='ledger test_ledger_mock' ./...
 
 test-race:
-	@VERSION=$(VERSION) go test -mod=readonly -race -tags='ledger test_ledger_mock' ./...
+	@VERSION=$(VERSION) $(GO_CMD) test -mod=readonly -race -tags='ledger test_ledger_mock' ./...
 
 test-cover:
-	@go test -mod=readonly -timeout 30m -race -coverprofile=coverage.txt -covermode=atomic -tags='ledger test_ledger_mock' ./...
+	@$(GO_CMD) test -mod=readonly -timeout 30m -race -coverprofile=coverage.txt -covermode=atomic -tags='ledger test_ledger_mock' ./...
 
 benchmark:
-	@go test -mod=readonly -bench=. ./...
+	@$(GO_CMD) test -mod=readonly -bench=. ./...
 
 test-sim-import-export: runsim
 	@echo "Running application import/export simulation. This may take several minutes..."
@@ -156,16 +198,17 @@ test-sim-full-app: runsim
 	@runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -ExitOnFail 50 10 TestFullAppSimulation
 
 test-sim-bench:
-	@VERSION=$(VERSION) go test -benchmem -run ^BenchmarkFullAppSimulation -bench ^BenchmarkFullAppSimulation -cpuprofile cpu.out github.com/jackalLabs/canine-chain/app
+	@VERSION=$(VERSION) $(GO_CMD) test -benchmem -run ^BenchmarkFullAppSimulation -bench ^BenchmarkFullAppSimulation -cpuprofile cpu.out github.com/jackalLabs/canine-chain/app
 
 runsim:
-	go install github.com/cosmos/tools/cmd/runsim@latest
+	$(GO_CMD) install github.com/cosmos/tools/cmd/runsim@latest
+
 ###############################################################################
 ###                                Linting                                  ###
 ###############################################################################
 
 format-tools:
-	go install mvdan.cc/gofumpt@v0.6.0
+	$(GO_CMD) install mvdan.cc/gofumpt@v0.6.0
 	gofumpt -l -w .
 
 lint: format-tools
@@ -175,7 +218,6 @@ format: format-tools
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs gofumpt -w -s
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs misspell -w
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs goimports -w -local github.com/jackalLabs/canine-chain
-
 
 ###############################################################################
 ###                                Protobuf                                 ###
@@ -217,9 +259,12 @@ proto-lint:
 proto-check-breaking:
 	@$(DOCKER_BUF) breaking --against $(HTTPS_GIT)#branch=main
 
-.PHONY: proto-all proto-gen proto-gen-any proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps docs
+# Note: The following are declared in .PHONY but have no corresponding targets:
+#  - install-debug
+#  - test-build
+#  - proto-update-deps
+# They are placeholders or references for future expansions. They can be removed
+# or defined if needed.
 
-.PHONY: all install install-debug \
-	go-mod-cache draw-deps clean build format \
-	test test-all test-build test-cover test-unit test-race \
-	test-sim-import-export local \
+.PHONY: proto-all proto-gen proto-gen-any proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps docs
+.PHONY: all install install-debug go-mod-cache draw-deps clean build format test test-all test-build test-cover test-unit test-race test-sim-import-export local

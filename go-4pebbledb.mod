@@ -182,4 +182,8 @@ replace (
 
 	// use grpc compatible with cosmos-flavored protobufs
 	google.golang.org/grpc => google.golang.org/grpc v1.33.2
+
+	// PebbleDB replacements for isolated Pebble builds
+	github.com/tendermint/tm-db => github.com/effofxprime/tm-db-4pebbledb v0.6.8-0.20240206021653-7664d28b4854
+	github.com/cometbft/cometbft-db => github.com/effofxprime/cometbft-db-4pebbledb v0.0.0-20240124141910-d74f5dec49a7
 )
