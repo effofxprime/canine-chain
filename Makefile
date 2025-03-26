@@ -33,15 +33,15 @@ GO_CMD := go
 ifeq ($(TOOLCHAIN_GO_VERSION),)
   $(info No toolchain version specified in go.mod. Using default 'go' command.)
 else
-  ifeq ("$(shell which go$(TOOLCHAIN_GO_VERSION) 2>/dev/null)","")
+  ifeq ("$(shell which $(TOOLCHAIN_GO_VERSION) 2>/dev/null)","")
     ifeq ("$(shell go version | grep $(TOOLCHAIN_GO_VERSION))","")
       $(info Current Golang Version: $(shell go version))
       $(info Installing Go version $(TOOLCHAIN_GO_VERSION) via golang.org/dl)
-      $(shell go install golang.org/dl/go$(TOOLCHAIN_GO_VERSION)@latest)
-      $(shell go$(TOOLCHAIN_GO_VERSION) download)
+      $(shell go install golang.org/dl/$(TOOLCHAIN_GO_VERSION)@latest)
+      $(shell $(TOOLCHAIN_GO_VERSION) download)
     endif
   endif
-  GO_CMD := go$(TOOLCHAIN_GO_VERSION)
+  GO_CMD := $(TOOLCHAIN_GO_VERSION)
 endif
 
 # process build tags
