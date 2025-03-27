@@ -63,9 +63,9 @@ endif
 ########################################
 ###  Alternate Module File Handling  ###
 ########################################
-# When building with PebbleDB enabled, we want to use an alternate set of module files.
-# If WITH_PEBBLEDB is true/yes (case-insensitive), then use go-4pebbledb.mod and go-4pebbledb.sum;
-# otherwise, default to go.mod and go.sum.
+# When building with PebbleDB enabled, we want to use alternate module files.
+# If WITH_PEBBLEDB is set to "true" or "yes" (case-insensitive), then use
+# go-4pebbledb.mod and go-4pebbledb.sum; otherwise, default to go.mod and go.sum.
 lower_WITH_PEBBLEDB := $(shell echo $(WITH_PEBBLEDB) | tr A-Z a-z)
 ifneq ($(filter $(lower_WITH_PEBBLEDB),true yes),)
   MODFILE := go-4pebbledb.mod
@@ -119,9 +119,9 @@ endif
 #  - Append a "-pebbledb" suffix to VERSION.
 #  - Add the necessary ldflags for Pebble.
 #  - Note: PebbleDB uses its own go.mod (go-4pebbledb.mod) file with two extra replacement lines:
-#      // PebbleDB replacements for isolated Pebble builds
-#      github.com/tendermint/tm-db => github.com/effofxprime/tm-db-4pebbledb v0.6.8-0.20240206021653-7664d28b4854
-#      github.com/cometbft/cometbft-db => github.com/effofxprime/cometbft-db-4pebbledb v0.0.0-20240124141910-d74f5dec49a7
+#       // PebbleDB replacements for isolated Pebble builds
+#       github.com/tendermint/tm-db => github.com/effofxprime/tm-db-4pebbledb v0.6.8-0.20240206021653-7664d28b4854
+#       github.com/cometbft/cometbft-db => github.com/effofxprime/cometbft-db-4pebbledb v0.0.0-20240124141910-d74f5dec49a7
 lower_WITH_PEBBLEDB := $(shell echo $(WITH_PEBBLEDB) | tr A-Z a-z)
 ifneq ($(filter $(lower_WITH_PEBBLEDB),true yes),)
   build_tags += pebbledb
